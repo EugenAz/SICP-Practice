@@ -1,0 +1,40 @@
+#lang racket
+
+10
+;Result: 10
+
+(+ 5 3 4)
+;Result: 12
+
+(- 9 1)
+;Result: 8
+
+(/ 6 2)
+;Result: 3
+
+(+ (* 2 4) (- 4 6))
+;Result: 6
+
+(define a 3)
+
+(define b (+ a 1))
+
+(+ a b (* a b))
+;Result: 19
+
+(= a b)
+;Result: #f
+
+(cond ((= a 4) 6)
+      ((= b 4) (+ 6 7 a))
+      (else 25))
+;Result: 16
+
+(+ 2 (if (> b a) b a))
+;Result: 6
+
+(* (cond ((> a b) a)
+         ((< a b) b)
+         (else -1))
+   (+ a 1))
+;Result: 16
