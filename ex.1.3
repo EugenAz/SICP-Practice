@@ -1,0 +1,15 @@
+#lang racket
+(require rackunit)
+
+(define (square x) (* x x))
+(define (sum_of_squares x y) (+ (square x) (square y)))
+(define (biggest x y z) (if (>= x y)
+                               (sum_of_squares x (if (>= y z) y z))
+                               (sum_of_squares y (if (>= x z) x z))))
+
+(biggest 1 5 5)
+
+(check-equal? (biggest 0 0 0) 0)
+(check-equal? (biggest 1 0 0) 1)
+(check-equal? (biggest 1 2 3) 13)
+(check-equal? (biggest 1 5 5) 50)
