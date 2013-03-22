@@ -1,0 +1,28 @@
+#lang racket
+
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+        (else else-clause)))
+
+(define (sqrt-iter guess x)
+  (new-if (good-enough? guess x)
+    guess
+    (sqrt-iter (improve guess x) x)))
+
+(define (average x y)(/ (+ x y) 2))
+
+(define (improve guess x) (average guess (/ x guess)))
+
+(define (square x) (* x x))
+
+(define (abs x)(if (> x 0) x (- 0 x)))
+
+(define (good-enough? guess x)
+(< (abs (- (square guess) x)) 0.00001))
+
+(define (sqrt x) (sqrt-iter 1 x))
+
+(sqrt 36)
+
+
+#| Т.к. в Scheme используется аппликативный порядок вычисления, то при вызове функции sqrt-iter - в качестве третьего аргумента функции new-if - произойдет бесконечная рекурсия. |#
