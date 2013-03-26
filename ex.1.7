@@ -7,17 +7,18 @@
 ))
 
 (define (improve guess x) (
-                           average guess (/ x guess)
-                           ))
+  average guess (/ x guess)
+))
 
-(define (good-enough? old_guess guess)
-(< (abs (- guess old_guess)) (/ guess 10000000)))
+(define (good-enough? old_guess guess)(
+  < (abs (- guess old_guess)) (/ guess 10000000)
+))
 
-(define (average x y)(/ (+ x y) 2))
+(define (average x y) (/ (+ x y) 2))
 
 (define (square x) (* x x))
 
-(define (abs x)(if (> x 0) x (- 0 x)))
+(define (abs x) (if (> x 0) x (- 0 x)))
 
 (define (sqrt x) (
   cond ((< x 0) #f)
