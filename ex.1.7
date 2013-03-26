@@ -1,0 +1,28 @@
+#lang racket
+
+(define (sqrt-iter old_guess guess x)(
+  if (good-enough? old_guess guess)
+    guess
+    (sqrt-iter guess (improve guess x) x)
+))
+
+(define (improve guess x) (
+                           average guess (/ x guess)
+                           ))
+
+(define (good-enough? old_guess guess)
+(< (abs (- guess old_guess)) (/ guess 10000000)))
+
+(define (average x y)(/ (+ x y) 2))
+
+(define (square x) (* x x))
+
+(define (abs x)(if (> x 0) x (- 0 x)))
+
+(define (sqrt x) (
+  cond ((< x 0) #f)
+       ((= x 0) 0)
+       (else (sqrt-iter 0 1 x))
+))
+
+; На маленкьих числах процедура с такой реализацией good-enough? работает лучше. На больших улучшения нет.
