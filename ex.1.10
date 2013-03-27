@@ -51,5 +51,8 @@
 (define (h n) (A 2 n))
 
 f(n) = 2*n
-g(n) = 2^n
-h(n) = hyper4(2,n)
+g(n) = 2^n, [n>0];
+       0, [n=0]
+h(n) = hyper4(2,n),
+       [n>0]; 0,
+       [n=0]; 2, [n=1]
