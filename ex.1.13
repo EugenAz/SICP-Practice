@@ -1,0 +1,62 @@
+#lang racket
+
+; SQRT
+(define (sqrt x)
+  (define d 1e-15)
+  (define (sqrt-iter old_guess guess x)
+    (if (good-enough? old_guess guess)
+        guess
+        (sqrt-iter guess (improve guess x) x)))
+
+  (define (improve guess x)
+    (average guess (/ x guess)))
+
+  (define (good-enough? old_guess guess)
+    (< (abs (- guess old_guess)) (* guess d)))
+
+  (define (average x y) (/ (+ x y) 2))
+  (define (abs x) (if (> x 0) x (- 0 x)))
+
+  (cond ((< x 0) #f)
+        ((< x d) 0)
+        (else (sqrt-iter 0 1 x))))
+
+; Golden Ratio (Fi)
+(define (fi) (/ (+ 1 (sqrt 5)) 2))
+; Psi
+(define (psi) (/ (- 1 (sqrt 5)) 2))
+
+; Fibonacci
+(define (fib n)
+  (define (fib-iter a b count) (if (= count 0)
+    b
+    (fib-iter (+ a b) a (- count 1))))
+  (fib-iter 1 0 n))
+
+; Power
+(define (power x n)
+  (define (power-iter product x n)
+    (if(= n 1)
+       product
+       (power-iter (* product x) x (- n 1))))
+  (cond((= n 0) 1)
+      ((< n 0) 0)
+      (else (power-iter x x n))))
+
+; Fib(n) ~ (fi^n)/sqrt(5)
+(define (gold-fib-n n)
+  (/ (power (fi) n) (sqrt 5)))
+
+; Fib(n) = (fi^n - psi^n)/sqrt(5)
+(define (fib-psi n)
+  (/ (- (power (fi) n) (power (psi) n)) (sqrt 5)))
+
+; Result:
+
+(fib 27.0)
+
+;1
+(gold-fib-n 27.0)
+
+;2
+(fib-psi 27.0)
